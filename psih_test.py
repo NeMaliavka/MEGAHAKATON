@@ -96,66 +96,78 @@ print(len(question))
 c = 1
 user_answer = []
 user_id = 1
-# for q in question:
-#     print(f'{c}. {q}')
-#     while True:
-#         user = int(input('Введите 1, если утверждение верно и 0, если для Вас оно не верно: '))
-#         if user == 1 or user == 1:
-#             user_answer.append(user)
-#             break
-#     c += 1
+for q in question:
+    print(f'{c}. {q}')
+    while True:
+        user = int(input('Введите 1, если утверждение верно и 0, если для Вас оно не верно: '))
+        if user == 1 or user == 0:
+            user_answer.append(user)
+            break
+    c += 1
 
-extraversion = []
-intoversion = []
-neirotizm = []
-for i in range(1, 58):
-    if i == 1 or i == 3 or i == 8 or i == 10 or i == 13 or i == 17 \
-            or i == 22 or i == 25 or i == 27 or i == 39 or i == 44 \
-            or i == 46 or i == 49 or i == 3 or i == 53:
-        extraversion.append(1)
-        intoversion.append('-')
-    elif i == 5 or i == 15 or i == 20 or i == 29 or i == 32\
-            or i == 34 or i == 37 or i == 41 or i == 51:
-        extraversion.append(0)
-        intoversion.append(1)
-        neirotizm.append('-')
-    elif  i == 2 or i == 4 or i == 7 or i == 9 or i == 11 \
-            or i == 14 or i == 16 or i == 19 or i == 21 \
-            or i == 23 or i == 28 or i == 31 or i == 33 or i == 35 \
-            or i == 38 or i == 40 or i == 43 or i == 45 or i == 47 \
-            or i == 50 or i == 52 or i == 55 or i == 56:
-        extraversion.append('-')
-        intoversion.append('-')
-        neirotizm.append(1)
-    else:
-        extraversion.append('-')
-        intoversion.append('-')
-        neirotizm.append('-')
-print(extraversion)
-print(intoversion)
-print(neirotizm)
+extraversion = [1, '-', 1, '-', 0, '-', '-', 1, '-', 1, '-', '-', 1,
+                '-', 0, '-', 1, '-', '-', 0, '-', 1, '-', '-', 1, '-',
+                1, '-', 0, '-', '-', 0, '-', 0, '-', '-', 0, '-', 1,
+                '-', 0, '-', '-', 1, '-', 1, '-', '-', 1, '-', 0, '-',
+                1, '-', '-', '-', '-']
+# intoversion = []
+neirotizm = ['-', 1, '-', 1, '-', '-', 1, '-', 1, '-', 1, '-', '-', 1,
+             '-', 1, '-', '-', 1, '-', 1, '-', 1, '-', '-', '-', '-',
+             1, '-', '-', 1, '-', 1, '-', 1, '-', '-', 1, '-', 1, '-',
+             '-', 1, '-', 1, '-', 1, '-', '-', 1, '-', 1, '-', '-', 1, 1, '-']
+# for i in range(1, 58):
+#     if i == 1 or i == 3 or i == 8 or i == 10 or i == 13 or i == 17 \
+#             or i == 22 or i == 25 or i == 27 or i == 39 or i == 44 \
+#             or i == 46 or i == 49 or i == 3 or i == 53:
+#         extraversion.append(1)
+#         #intoversion.append('-')
+#         neirotizm.append('-')
+#     elif i == 5 or i == 15 or i == 20 or i == 29 or i == 32\
+#             or i == 34 or i == 37 or i == 41 or i == 51:
+#         extraversion.append(0)
+#         #intoversion.append(1)
+#         neirotizm.append('-')
+#     elif  i == 2 or i == 4 or i == 7 or i == 9 or i == 11 \
+#             or i == 14 or i == 16 or i == 19 or i == 21 \
+#             or i == 23 or i == 28 or i == 31 or i == 33 or i == 35 \
+#             or i == 38 or i == 40 or i == 43 or i == 45 or i == 47 \
+#             or i == 50 or i == 52 or i == 55 or i == 56:
+#         extraversion.append('-')
+#         #intoversion.append('-')
+#         neirotizm.append(1)
+#     else:
+#         extraversion.append('-')
+#         #intoversion.append('-')
+#         neirotizm.append('-')
+# print(extraversion, len(extraversion))
+# #print(intoversion)
+# print(neirotizm, len(neirotizm))
 
 result = {user_id:{'extraversion': 0,
-                   'intoversion': 0,
                    'neirotizm': 0,
                    'False answer': 0,
-                   'catrgory': ''}}
+                   'category': ''}}
+
+false_answer_mines = [11, 17, 29, 41, 47, 53]
+false_answer_plus = [5, 23, 36]
+# 9 отлавливаемых ложных ответов
 
 for id_ans in range(len(user_answer)):
     if user_answer[id_ans] == 1:
-        if extraversion[id_ans] == 1:
+        if id_ans+1 in false_answer_plus:
+            result[user_id]['False answer'] += 1
+        elif extraversion[id_ans] == 1:
             result[user_id]['extraversion'] += 1
-        elif intoversion[id_ans] == 1:
-            result[user_id]['intoversion'] += 1
+        # elif intoversion[id_ans] == 1:
+        #     result[user_id]['intoversion'] += 1
         elif neirotizm[id_ans] == 1:
             result[user_id]['neirotizm'] += 1
-        elif id_ans == 5 or id_ans == 23 or id_ans == 36:
-            result[user_id]['False answer'] += 1
     elif user_answer[id_ans] == 0:
-        if extraversion[id_ans] == 0:
-            result[user_id]['extraversion'] += 1
-        elif id_ans == 11 or id_ans == 17 or id_ans == 29 or id_ans == 41 or id_ans == 47 or id_ans == 53:
+        if id_ans + 1 in false_answer_mines:
             result[user_id]['False answer'] += 1
+        elif extraversion[id_ans] == 0:
+            result[user_id]['extraversion'] += 1
+
 
 if result[user_id]['False answer'] > 4:
     general = 'Ответы ложные, не имеет смысла анализировать данный результат'
@@ -173,8 +185,13 @@ elif result[user_id]['extraversion'] <= 9:
     general = 'интроверт'
 elif result[user_id]['extraversion'] < 12:
     general = 'склонность к интроверсии'
-
-
+print(result)
+result[user_id]['False answer'] = f'{round(result[user_id]['False answer'] / 9 * 100, 2)} %'
+# 23
+result[user_id]['extraversion'] = f'{round(result[user_id]['extraversion'] / 23 * 100, 2)} %'
+result[user_id]['category'] = general
+print(result)
+# print(general)
 
 
 
