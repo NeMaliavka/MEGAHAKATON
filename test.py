@@ -44,7 +44,7 @@ for id_ans in range(len(user_answer)):
             result[user_id]['показатель Б'] += 1
 
 if result[user_id]['показатель Б'] == 12 or result[user_id]['показатель В'] == 12:
-    result[user_id]['психотип1'] = 'Результат не подлежит анализу'
+    result[user_id]['психотип1'] = 'Средний результат'
 elif 0 <= result[user_id]['показатель Б'] <= 12 and 0 <= result[user_id]['показатель В'] <= 12:
     result[user_id]['психотип1'] = 'Флегматик'
 elif 0 <= result[user_id]['показатель Б'] <= 12 and 12 <= result[user_id]['показатель В'] <= 24:
